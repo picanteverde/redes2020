@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    
+    <!-- Javascript libraries -->
+
+    <!-- is always better to use a CDN but I'm importing this locally so it can be used 
+    without an internet connection -->
+    <!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <script src="../libs/plotly.latest.min.js"></script>
+    <script src="../libs/p5.min.js"></script>
+    <script src="../libs/rk4.js"></script>
+    <script src="../libs/lib.js"></script>
+    <script src="../libs/PlotP5.js"></script>
+    <link href="../libs/basic.css" rel="stylesheet">
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <h1>Pr&aacute;ctico 1</h1>
+    <h2>Modelo predador preza de Lotka-Volterra</h2>
+    <p>Sistema din&aacute;mico de dos ecuaciones diferenciales ordinarias que modela las tasas de
+      cambio en la cantidad de Predadores (Zorros) y Prezas (Conejos) en un ecosistema.</p>
+    <div>\begin{cases}
+      \dot{C}(t) &= \alpha C(t) - \beta C(t) Z(t) \\
+      \dot{Z}(t) &= -\gamma Z(t) + \delta C(t) Z(t)
+      \end{cases}</div>
+    <div id="diagramaDeFlujo"></div>
+    <pre id="solution"></pre>
+    <script src="./model.js" async defer></script>
+    <div id="tester" style="width:600px;height:250px;"></div>
+
+  </body>
+</html>

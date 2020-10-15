@@ -1,0 +1,15 @@
+html {
+  font-family: sans-serif;
+}
+
+* {
+  margin: 0px;
+}
+
+h1,h2 {
+  text-align: center;
+}
+p{
+  margin: 20px;
+  padding: 10px;
+}
