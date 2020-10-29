@@ -45,8 +45,22 @@ class Plot {
   line (start, end) {
     const [x1, y1] = this.fix(start)
     const [x2, y2] = this.fix(end)
-    console.log()
     this.p.line(x1, y1, x2, y2)
+  }
+
+  text (str, anchor) {
+    const [x, y] = this.fix(anchor)
+    this.p.text(str, x, y)
+  }
+
+  slider (name, min, max, value, step = 1, anchor = [0, 0], width = 130) {
+    const [x, y] = this.fix(anchor)
+    const s = this.p.createSlider(min, max, value, step)
+    s.position(x, y)
+    s.style('width', `${width}px`)
+    this.p.textAlign(this.p.RIGHT, this.p.TOP)
+    this.text(name, [anchor[0], anchor[1]])
+    return s
   }
 
   triangle (point1, point2, point3) {
@@ -65,8 +79,7 @@ class Plot {
 
   circle (point, diameter) {
     const [x, y] = this.fix(point)
-    const [d] = this.fix([diameter, 0])
-    this.p.circle(x, y, d)
+    this.p.circle(x, y, diameter)
   }
 
   vector (end, start = [0, 0]) {
@@ -94,7 +107,18 @@ class Plot {
     )
   }
 
-  axes () {
+  axes (xColor, yColor) {
+    const xMin = Math.floor(this.min.x)
+    const yMin = Math.floor(this.min.y)
+    const xMax = Math.ceil(this.max.x)
+    const yMax = Math.ceil(this.max.y)
+    this.p.stroke(xColor || '#990000')
+    this.line([xMin, 0], [xMax, 0])
+    this.p.stroke(xColor || '#009900')
+    this.line([0, yMin], [0, yMax])
+  }
+
+  grid () {
     const xMin = Math.floor(this.min.x)
     const yMin = Math.floor(this.min.y)
     const xMax = Math.ceil(this.max.x)
@@ -103,16 +127,18 @@ class Plot {
     const xSize = Math.floor(size / this.scale.x)
     const ySize = Math.floor(size / this.scale.y)
 
-    const xSteps = Math.floor((xMax - xMin) / xSize)
-    const ySteps = Math.floor((yMax - yMin) / ySize)
-
     this.p.stroke(255)
-    for (let i = xMin; i < xSteps; i += xSize) {
+    this.p.textSize(10)
+    this.p.textAlign(this.p.CENTER, this.p.TOP)
+    for (let i = xMin; i < xMax; i += xSize) {
       this.line([i, yMin], [i, yMax])
+      this.text(i, [i, -0.1])
     }
 
-    for (let i = yMin; i < ySteps; i += ySize) {
+    this.p.textAlign(this.p.RIGHT, this.p.CENTER)
+    for (let i = yMin; i < yMax; i += ySize) {
       this.line([xMin, i], [xMax, i])
+      this.text(i, [-0.1, i])
     }
   }
 }

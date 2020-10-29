@@ -1,5 +1,5 @@
 function range(init, end, step) {
-  return Array.from(Array((end - init) / step + 1)).map((x,i) => init + i * step)
+  return Array.from(Array(Math.floor((end - init) / step) + 1)).map((x,i) => init + i * step)
 }
 
 function combine(x, y) {

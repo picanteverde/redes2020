@@ -32,27 +32,34 @@ let vectors = space.map((point) => [
   R(0, point[0], point[1]),
   F(0, point[0], point[1])
 ])
-.map((v) => vScale(v,0.4))
+.map((v) => vScale(v, 0.4))
 .map((v, i) => vTranslate(v, space[i]))
 
 console.log(vectors)
 console.log(space)
 
-let xMax = 50
-let yMax = 12
-let width = 400 * 50/12
-let height = 400
+let xMax = 52
+let yMax = 15
+let xMin = -1.5
+let yMin = -10
+let width = 500 * (xMax - xMin) / (yMax - yMin)
+let height = 500
 
 // P5
 const plot = new Plot(width, height, new p5((p) => {
+
   p.setup = () => {
     p.createCanvas(plot.width, plot.height)
+    p.background('#efeaef')
+    plot.grid()
+    // plot.slider('alpha', 0, 1, alpha, 0.05, [2, -1])
   }
   p.draw = () => {
-    p.background('#efeaef')
     plot.axes()
 
     vectors.map((v, i) => plot.vector(v, space[i]))
-    plot.circle([30, 5], .1)
+    // Fixed points
+    plot.circle([gamma / delta, alpha / beta], 10)
+    plot.circle([0, 0], 10)
   }
-}, 'diagramaDeFlujo'), xMax, yMax, -0.5, -0.5)
+}, 'diagramaDeFlujo'), xMax, yMax, xMin, yMin)
